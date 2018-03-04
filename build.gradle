@@ -32,9 +32,9 @@ project(':server-core') {
     dependencies {
         compile project(':common')
     }
-    //task fatJar(type: OneJar) {
-        // mainClass = 'edu.server.Main'
-    //}
+    task fatJar(type: OneJar) {
+         mainClass = 'edu.server.Main'
+    }
 }
 
 project(':tracker-core') {
@@ -50,16 +50,16 @@ project(':tracker-ui') {
     dependencies {
         compile project(':common')
     }
-    //task fatJar(type: OneJar) {
-    // mainClass = 'edu.tracker-ui.Main'
-    //}
+    task fatJar(type: OneJar) {
+     mainClass = 'edu.tracker-ui.Main'
+    }
 }
 
 project(':server-ui') {
     dependencies {
         compile project(':common')
     }
-    //task fatJar(type: OneJar) {
-    // mainClass = 'edu.server-ui.Main'
-    //}
+    task fatJar(type: OneJar) {
+     mainClass = 'edu.server-ui.Main'
+    }
 }
