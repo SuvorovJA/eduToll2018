@@ -3,7 +3,7 @@ apply plugin: 'idea'
 subprojects{
     apply plugin: 'java'
     apply plugin: 'java-library-distribution'
-    //apply plugin: 'gradle-one-jar'
+    apply plugin: 'gradle-one-jar'
     repositories {
         mavenCentral()
         mavenLocal()
@@ -33,7 +33,7 @@ project(':server-core') {
         compile project(':common')
     }
     //task fatJar(type: OneJar) {
-        // mainClass = 'jdev.tracker.Main'
+        // mainClass = 'edu.server.Main'
     //}
 }
 
@@ -41,9 +41,9 @@ project(':tracker-core') {
     dependencies {
         compile project(':common')
     }
-    //task fatJar(type: OneJar) {
-        // mainClass = 'jdev.tracker.Main'
-    //}
+    task fatJar(type: OneJar) {
+         mainClass = 'edu.tracker.Main'
+    }
 }
 
 project(':tracker-ui') {
@@ -51,7 +51,7 @@ project(':tracker-ui') {
         compile project(':common')
     }
     //task fatJar(type: OneJar) {
-    // mainClass = 'jdev.tracker.Main'
+    // mainClass = 'edu.tracker-ui.Main'
     //}
 }
 
@@ -60,6 +60,6 @@ project(':server-ui') {
         compile project(':common')
     }
     //task fatJar(type: OneJar) {
-    // mainClass = 'jdev.tracker.Main'
+    // mainClass = 'edu.server-ui.Main'
     //}
 }
