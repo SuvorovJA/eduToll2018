@@ -1,6 +1,5 @@
 package edu.tracker;
 
-import edu.dto.PointDTO;
 import edu.tracker.context.InjectionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

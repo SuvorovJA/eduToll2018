@@ -6,13 +6,11 @@ package edu.tracker.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.dto.PointDTO;
-import edu.tracker.context.InjectionContext;
 import edu.tracker.storage.QueueGPS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 @Service
@@ -32,7 +30,7 @@ public class DataPeek {
         String className = this.getClass().getName().toString();
         // получить json от GpsService
         String localstring = gpsService.getNext();
-        System.out.println(className + ": fetchGps() fetched: " + localstring);
+        System.out.println(className + ": fetchGps() " + localstring);
         // переделать json в объект PointDTO
         ObjectMapper mapper = new ObjectMapper();
         PointDTO localpoint = null;
