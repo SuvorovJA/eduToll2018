@@ -4,9 +4,11 @@
 
 package edu.tracker.context;
 
+import edu.dto.PointDTO;
 import edu.tracker.services.DataPeek;
 import edu.tracker.services.DataSend;
 import edu.tracker.services.GpsService;
+import edu.tracker.storage.QueueGPS;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -32,5 +34,13 @@ public class InjectionContext {
         return new GpsService();
     }
 
+    @Bean
+    public QueueGPS queueGPS(){
+        return new QueueGPS();
+    }
 
+    @Bean
+    public PointDTO pointDTO(){
+        return new PointDTO();
+    }
 }

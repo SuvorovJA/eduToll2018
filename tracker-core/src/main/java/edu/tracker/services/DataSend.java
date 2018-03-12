@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DataSend {
+
     @Scheduled(cron = "${data.send.cron}")
     private void sendToDB() {
         System.out.println("DataSend.sendToDB()");

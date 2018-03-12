@@ -6,12 +6,10 @@ package edu.tracker.services;
 import io.jenetics.jpx.GPX;
 import io.jenetics.jpx.WayPoint;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -56,7 +54,7 @@ public class GpsService {
         localpoint = itWpl.next();
         String result = "{\"lat\":" + localpoint.getLongitude() + "," +
                 "\"lon\":" + localpoint.getLatitude() + "," +
-                "\"autoId\": E555EM70," +
+                "\"autoId\": \"E555EM70\"," +
                 "\"time\":" + localpoint.getTime().get().toInstant().toEpochMilli() +
                 "}";
         return result;
