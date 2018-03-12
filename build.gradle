@@ -1,6 +1,10 @@
 apply plugin: 'idea'
 
-subprojects{
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1' //version required for fatJar
+}
+
+subprojects {
     apply plugin: 'java'
     apply plugin: 'java-library-distribution'
     apply plugin: 'gradle-one-jar'
@@ -9,7 +13,20 @@ subprojects{
         mavenLocal()
     }
     dependencies {
+
         testCompile group: 'junit', name: 'junit', version: '4.12'
+
+        // spring
+        // https://mvnrepository.com/artifact/org.springframework/spring-context
+        compile group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
+
+        // logger
+        // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+        compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+        // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+        compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
+
+        //
     }
 }
 
@@ -23,9 +40,11 @@ buildscript {
 }
 
 project(':common') {
-    dependencies{
+    dependencies {
+        // json
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
-    }
+
+     }
 }
 
 project(':server-core') {
@@ -33,16 +52,21 @@ project(':server-core') {
         compile project(':common')
     }
     task fatJar(type: OneJar) {
-         mainClass = 'edu.server.Main'
+        mainClass = 'edu.server.Main'
     }
 }
 
 project(':tracker-core') {
     dependencies {
         compile project(':common')
+
+        // parsing GPX file for GPS Service
+        // https://mvnrepository.com/artifact/io.jenetics/jpx
+        compile group: 'io.jenetics', name: 'jpx', version: '1.2.3'
+
     }
     task fatJar(type: OneJar) {
-         mainClass = 'edu.tracker.Main'
+        mainClass = 'edu.tracker.Main'
     }
 }
 
@@ -51,7 +75,7 @@ project(':tracker-ui') {
         compile project(':common')
     }
     task fatJar(type: OneJar) {
-     mainClass = 'edu.tracker-ui.Main'
+        mainClass = 'edu.tracker-ui.Main'
     }
 }
 
@@ -60,6 +84,27 @@ project(':server-ui') {
         compile project(':common')
     }
     task fatJar(type: OneJar) {
-     mainClass = 'edu.server-ui.Main'
+        mainClass = 'edu.server-ui.Main'
+    }
+}
+
+
+
+
+
+// TEST-DRIVE-PROJECT. no Spring integration
+project(':gpx-reader') {
+    dependencies {
+//        compile project(':common')  // зачем зависимость от коммон?
+
+// https://mvnrepository.com/artifact/org.apache.sis.storage/sis-xmlstore
+//        compile group: 'org.apache.sis.storage', name: 'sis-xmlstore', version: '0.8'
+// монструозная библиотека, попробую другую
+
+        // https://mvnrepository.com/artifact/io.jenetics/jpx
+        compile group: 'io.jenetics', name: 'jpx', version: '1.2.3'
+
+        // test подключен но реализован будет наверное позже
+//        testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 }

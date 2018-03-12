@@ -49,6 +49,7 @@ public class PointDTO {
                 "lat=" + lat +
                 ", lon=" + lon +
                 ", autoId='" + autoId + '\'' +
+                ", time=" + time +
                 '}';
     }
 
