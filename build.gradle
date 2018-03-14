@@ -90,21 +90,3 @@ project(':server-ui') {
 
 
 
-
-
-// TEST-DRIVE-PROJECT. no Spring integration
-project(':gpx-reader') {
-    dependencies {
-//        compile project(':common')  // зачем зависимость от коммон?
-
-// https://mvnrepository.com/artifact/org.apache.sis.storage/sis-xmlstore
-//        compile group: 'org.apache.sis.storage', name: 'sis-xmlstore', version: '0.8'
-// монструозная библиотека, попробую другую
-
-        // https://mvnrepository.com/artifact/io.jenetics/jpx
-        compile group: 'io.jenetics', name: 'jpx', version: '1.2.3'
-
-        // test подключен но реализован будет наверное позже
-//        testCompile group: 'junit', name: 'junit', version: '4.12'
-    }
-}
