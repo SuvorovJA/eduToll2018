@@ -1,4 +1,4 @@
-/**
+/*
  * берет данные из  QueueGPS  помещает в базу данных (очередь QueueDB или Лог) в формате json
  * периодичность ~0,5 минутa
  */
@@ -19,27 +19,29 @@ public class DataSend {
 
     private static final Logger log = LoggerFactory.getLogger(DataSend.class);
 
-    @Value("${data.send.packet.size}")
-    private int packet;
-
     @Autowired
     private QueueGPS queueGPS;
 
     @Scheduled(cron = "${data.send.cron}")
     private void sendToDB() {
-        // как выбрать всё из очереди?
-        PointDTO localpoint = null;
-        for (int i=1;i<=packet;++i){
+        int packet = queueGPS.getSize();
+        if (packet == 0) {
+            log.warn("очередь пуста");
+            return;
+        }
+        PointDTO localpoint; // = null;
+        for (int i = 1; i <= packet; ++i) {
             try {
                 localpoint = queueGPS.take(); // выборка из очереди
             } catch (InterruptedException e) {
-//                e.printStackTrace();
+                log.error(e.getMessage());
                 break;
             }
             try {
                 log.info(localpoint.toJson() + "  (" + i + ")"); // типа сохранение в БД
             } catch (JsonProcessingException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
+                break;
             }
         }
     }
