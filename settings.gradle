@@ -8,5 +8,3 @@ include 'tracker-core'
 include 'tracker-ui'
 // веб-интерфейс системы, взаимодействие с персоналом
 include 'server-ui'
-// поставщик тестовых данных gps-трэка (чтение и парзинг gpx файла)
-include 'gpx-reader'
