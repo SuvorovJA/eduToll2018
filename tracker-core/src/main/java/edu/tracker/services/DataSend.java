@@ -6,11 +6,11 @@ package edu.tracker.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.dto.PointDTO;
+import edu.tracker.controllers.SendController;
 import edu.tracker.storage.QueueGPS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +21,9 @@ public class DataSend {
 
     @Autowired
     private QueueGPS queueGPS;
+
+    @Autowired
+    private SendController sendController;
 
     @Scheduled(cron = "${data.send.cron}")
     private void sendToDB() {
@@ -37,12 +40,15 @@ public class DataSend {
                 log.error(e.getMessage());
                 break;
             }
+            // в локальный лог
             try {
-                log.info(localpoint.toJson() + "  (" + i + ")"); // типа сохранение в БД
+                log.info(localpoint.toJson() + "  (" + i + ")");
             } catch (JsonProcessingException e) {
                 log.error(e.getMessage());
                 break;
             }
+            // в ДБ
+            sendController.setPoint(localpoint);
         }
     }
 
