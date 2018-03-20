@@ -71,9 +71,26 @@ project(':tracker-ui') {
 }
 
 project(':server-ui') {
+    apply plugin: 'org.springframework.boot'
+
     dependencies {
         compile project(':common')
+        //
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        // tag::security[]
+        compile("org.springframework.boot:spring-boot-starter-security")
+        // end::security[]
+        // junit from common
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.springframework.security:spring-security-test")
     }
+
+    jar {
+        // ?
+        baseName = 'security-boot'
+        version =  '0.1.0'
+    }
+
 }
 
 
