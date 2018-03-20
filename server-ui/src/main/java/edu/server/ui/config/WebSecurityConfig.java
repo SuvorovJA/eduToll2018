@@ -14,15 +14,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/css/**", "/img/**").permitAll()
                 .antMatchers("/", "/home").authenticated()
+                .antMatchers("/css/**", "/img/**").permitAll()
                 .antMatchers("/routes/**", "/payments/**").hasRole("CLIENT")
                 .antMatchers("/registerClient/**").hasRole("MANAGER")
                 .antMatchers("/registerManager/**").hasRole("ADMIN")
-                .anyRequest().authenticated() // or .hasRole("CLIENT")?
+                .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
                 .and().logout().permitAll();
-    }
+    } //.anyRequest().authenticated() // or .anyRequest().hasRole("CLIENT")?
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

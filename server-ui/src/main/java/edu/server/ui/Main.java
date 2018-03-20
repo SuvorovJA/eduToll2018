@@ -12,7 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("edu.server.ui.config")
 public class Main {
     public static void main(String... args) throws Exception {
-            SpringApplication.run(Main.class, args);
-        }
+        SpringApplication.run(Main.class, args);
     }
 }
