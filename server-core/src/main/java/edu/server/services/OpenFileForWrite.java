@@ -16,6 +16,7 @@ import java.nio.file.Files;
  * сброс на диск каждые 20 строк
  * файл создаётся во временной папке
  * типа: /tmp/receivedpoints_4561794685426215327.txt
+ *          %Temp%\receivedpoints_5719974674726407826.txt
  * путь и имя будет в логе
  */
 
@@ -28,7 +29,7 @@ public class OpenFileForWrite {
     private String fileSuffix = ".txt";
 
     private BufferedWriter bufferedWriter;
-    int flushCounter = 0;
+    private int flushCounter = 0;
 
     public OpenFileForWrite() {
         File tempFile = null;
