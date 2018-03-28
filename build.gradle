@@ -8,16 +8,19 @@ subprojects {
         mavenLocal()
     }
     dependencies {
-        testCompile group: 'junit', name: 'junit', version: '4.12'
+
         // spring
         // https://mvnrepository.com/artifact/org.springframework/spring-context
         compile group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
+
         // logger
         // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
         // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
-        //
+
+        // tests
+        testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 }
 
@@ -44,9 +47,14 @@ project(':common') {
 project(':server-core') {
     apply plugin: 'org.springframework.boot'
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-        compile("org.springframework.boot:spring-boot-devtools")
-        compile group: 'commons-io', name: 'commons-io', version: '2.5'
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")   // where that using in server-core ???
+        compile("org.springframework.boot:spring-boot-devtools")            // where that using ???
+        compile group: 'commons-io', name: 'commons-io', version: '2.5'     // where that using ???
+        // tests
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.springframework.security:spring-security-test")
+        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+        //
         compile project(':common')
     }
 }
@@ -54,12 +62,17 @@ project(':server-core') {
 project(':tracker-core') {
     apply plugin: 'org.springframework.boot'
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-        compile("org.springframework.boot:spring-boot-devtools")
-        compile group: 'commons-io', name: 'commons-io', version: '2.5'
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")   // where that using in tracker-core???
+        compile("org.springframework.boot:spring-boot-devtools")            // where that using ???
+        compile group: 'commons-io', name: 'commons-io', version: '2.5'     // where that using ???
         // parsing GPX file for GPS Service
         // https://mvnrepository.com/artifact/io.jenetics/jpx
         compile group: 'io.jenetics', name: 'jpx', version: '1.2.3'
+        // tests
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.springframework.security:spring-security-test")
+        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+        //
         compile project(':common')
     }
 }
@@ -74,19 +87,21 @@ project(':server-ui') {
     apply plugin: 'org.springframework.boot'
 
     dependencies {
-        compile project(':common')
-        //
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf") //ok
+        // spring-boot-devtools сюда надо??
         // tag::security[]
         compile("org.springframework.boot:spring-boot-starter-security")
         // end::security[]
-        // junit from common
+        // tests
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
+        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+        //
+        compile project(':common')
     }
 
     jar {
-        // ?
+        // where that using ???
         baseName = 'security-boot'
         version =  '0.1.0'
     }

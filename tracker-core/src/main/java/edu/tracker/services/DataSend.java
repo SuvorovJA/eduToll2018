@@ -26,7 +26,7 @@ public class DataSend {
     private SendController sendController;
 
     @Scheduled(cron = "${data.send.cron}")
-    private void sendToDB() {
+    public void sendToDB() {
         int packet = queueGPS.getSize();
         if (packet == 0) {
             log.warn("очередь пуста");

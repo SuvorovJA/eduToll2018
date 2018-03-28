@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,8 @@ public class OpenFileForWrite {
     private BufferedWriter bufferedWriter;
     private int flushCounter = 0;
 
-    public OpenFileForWrite() {
+    @PostConstruct
+    public void init() {
         File tempFile = null;
         try {
             tempFile = File.createTempFile(fileName, fileSuffix);

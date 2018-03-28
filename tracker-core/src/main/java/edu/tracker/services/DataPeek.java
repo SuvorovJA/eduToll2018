@@ -30,7 +30,7 @@ public class DataPeek {
     private PointDTO pointDTO;
 
     @Scheduled(cron = "${data.peek.cron}")
-    private void fetchGps() {
+    public void fetchGps() {
         // получить json от GpsService
         String localstring = gpsService.getNext();
         log.info("fetchGps() " + localstring);
