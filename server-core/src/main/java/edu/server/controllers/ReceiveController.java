@@ -14,16 +14,16 @@ public class ReceiveController {
 
     private static final Logger log = LoggerFactory.getLogger(ReceiveController.class);
 
-    @Autowired
-    RestTemplate restTemplate;
+//   не используется
+//   @Autowired
+//    RestTemplate restTemplate;
 
     @Autowired
-    OpenFileForWrite fileForWrite;
+    private OpenFileForWrite fileForWrite;
 
     // здесь в запросе прилетает сразу точка, принять и сохранить
     @RequestMapping(value = "/receiver", method = RequestMethod.POST)
-    public @ResponseBody
-    PointDTO addPoint(@RequestBody PointDTO localpoint) {
+    public @ResponseBody PointDTO addPoint(@RequestBody PointDTO localpoint) {
         try {
             // сохранить в БД (вывести в лог и в файл)
             log.info("RECEIVED POINT " + localpoint.toJson());

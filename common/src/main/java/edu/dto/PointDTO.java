@@ -38,21 +38,6 @@ public class PointDTO {
         this.autoId = autoId;
     }
 
-    public String toJson() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(this);
-    }
-
-    @Override
-    public String toString() {
-        return "PointDTO{" +
-                "lat=" + lat +
-                ", lon=" + lon +
-                ", autoId='" + autoId + '\'' +
-                ", time=" + time +
-                '}';
-    }
-
     public void setTime(long time) {
         this.time = time;
     }
@@ -60,4 +45,21 @@ public class PointDTO {
     public long getTime() {
         return time;
     }
+
+    public String toJson() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(this);
+    }
+
+//    не используется
+//    @Override
+//    public String toString() {
+//        return "PointDTO{" +
+//                "lat=" + lat +
+//                ", lon=" + lon +
+//                ", autoId='" + autoId + '\'' +
+//                ", time=" + time +
+//                '}';
+//    }
+
 }
