@@ -1,6 +1,7 @@
 package edu.server.ui.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -15,8 +16,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/error").setViewName("error");
         registry.addViewController("/payments").setViewName("payments");
-        registry.addViewController("/img").setViewName("img/index"); //?
-        registry.addViewController("/css").setViewName("css/index"); //?
+//      img + css перенесены в static согласно https://stackoverflow.com/questions/24661289/spring-boot-not-serving-static-content
+//        registry.addViewController("/img").setViewName("img/index"); //?
+//        registry.addViewController("/css").setViewName("css/index"); //?
         registry.addViewController("/registerManager").setViewName("registerManager");
         registry.addViewController("/registerClient").setViewName("registerClient");
     }

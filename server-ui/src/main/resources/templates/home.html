@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Пример Spring Security</title>
+        <link rel="stylesheet" href="/css/test.css"></link>
     </head>
     <body>
         <h1>Welcome!</h1>
@@ -11,8 +12,12 @@
         <p>Кликните <a th:href="@{/registerClient}">здесь</a>, если Вы - MANAGER .</p>
         <p>Кликните <a th:href="@{/registerManager}">здесь</a>, если Вы - ADMIN.</p>
 
-        <p> <a th:href="@{/css}">css</a> </p>
-        <p> <a th:href="@{/img}">img</a> </p>
-
+        <p> <a th:href="@{/css/index.html}">css</a> </p>
+        <p> <a th:href="@{/img/index.html}">img</a> </p>
+        <p>  <img src="test.jpg" alt="myImage1"/> </p>
+        <p></p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Выйти из системы"/>
+        </form>
     </body>
 </html>

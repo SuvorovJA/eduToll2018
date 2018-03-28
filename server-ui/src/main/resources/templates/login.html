@@ -11,6 +11,7 @@
         <div th:if="${param.logout}">
             Сеанс завершен, Вы вышли из системы.
         </div>
+        <p> <a th:href="@{/img/index.html}">img for all</a> </p>
         <form th:action="@{/login}" method="post">
             <div><label> Имя : <input type="text" name="username"/> </label></div>
             <div><label> Пароль: <input type="password" name="password"/> </label></div>

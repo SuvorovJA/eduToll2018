@@ -3,11 +3,10 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>CSS</title>
+        <link rel="stylesheet" href="/css/test.css"></link>
     </head>
     <body>
-        <h1 th:inline="text">Hello in CSS [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Выйти из системы"/>
-        </form>
+        <h1>Hello in STATIC CSS!</h1>
+        <p> <a href="/home">home</a> </p>
     </body>
 </html>
