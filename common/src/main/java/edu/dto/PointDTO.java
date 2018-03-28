@@ -14,17 +14,17 @@ public class PointDTO {
     private String autoId;
     private long time;
 
-//    public double getLat() {
-//        return lat;
-//    }
+    public double getLat() {
+        return lat;
+    }
 
     public void setLat(double lat) {
         this.lat = lat;
     }
 
-//    public double getLon() {
-//        return lon;
-//    }
+    public double getLon() {
+        return lon;
+    }
 
     public void setLon(double lon) {
         this.lon = lon;
