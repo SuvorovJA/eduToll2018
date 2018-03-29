@@ -19,11 +19,14 @@ public class DataSend {
 
     private static final Logger log = LoggerFactory.getLogger(DataSend.class);
 
-    @Autowired
     private QueueGPS queueGPS;
 
-    @Autowired
     private SendController sendController;
+
+    public DataSend(@Autowired QueueGPS queueGPS, @Autowired SendController sendController) {
+        this.queueGPS = queueGPS;
+        this.sendController = sendController;
+    }
 
     @Scheduled(cron = "${data.send.cron}")
     public void sendToDB() {
@@ -47,8 +50,8 @@ public class DataSend {
                 log.error(e.getMessage());
                 break;
             }
-            // в ДБ
-            sendController.setPoint(localpoint);
+            // в ДБ, в возврате эхо от приёмника
+            PointDTO pointDTO = sendController.setPoint(localpoint);
         }
     }
 

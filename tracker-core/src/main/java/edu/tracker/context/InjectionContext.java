@@ -28,11 +28,14 @@ import org.springframework.web.client.RestTemplate;
 @PropertySource("classpath:/properties.ini")
 public class InjectionContext {
 
-
+    @Bean
+    public SendController sendController() {
+        return new SendController();
+    }
 
     @Bean
-    public DataSend sendService() {
-        return new DataSend();
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
     }
 
     @Bean
@@ -51,8 +54,13 @@ public class InjectionContext {
     }
 
     @Bean
+    public DataSend sendService() {
+        return new DataSend(queueGPS(), sendController());
+    }
+
+    @Bean
     public DataPeek peekService() {
-        return new DataPeek(queueGPS(),gpsService());
+        return new DataPeek(queueGPS(), gpsService());
     }
 
     @Bean
@@ -63,13 +71,4 @@ public class InjectionContext {
         return scheduler;
     }
 
-    @Bean
-    public SendController sendController() {
-        return new SendController();
-    }
-
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
 }

@@ -12,7 +12,6 @@ public class DataPeekTest {
 
     // string from file
     private String expected = "{\"lat\":54.109707,\"lon\":54.105139,\"autoId\":\"E555EM70\",\"time\":1282361025400}";
-    private String readable;
     private GpsService gpsService = null;
     private PointDTO localpoint = null;
     private QueueGPS queueGPS = null;

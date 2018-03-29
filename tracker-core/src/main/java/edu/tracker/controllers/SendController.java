@@ -27,12 +27,12 @@ public class SendController {
     @Autowired
     RestTemplate restTemplate;
 
-    public void setPoint(PointDTO point) {
+    public PointDTO setPoint(PointDTO point) {
         this.point = point;
-        postSend();
+        return postSend();
     }
 
-    private void postSend() {
+    private PointDTO postSend() {
         // сохранение в БД
         //
         boolean statusOk = true;
@@ -69,5 +69,6 @@ public class SendController {
                 log.error(e.getMessage());
             }
         }
+        return pointDTOreturned;
     }
 }
