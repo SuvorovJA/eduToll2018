@@ -28,7 +28,7 @@ public class OpenFileForWrite {
 
     private String fileName = "receivedpoints_"; // обойдемся без параметров spring
     private String fileSuffix = ".txt";
-
+    private String tempFileAbsolutePath;
     private BufferedWriter bufferedWriter;
     private int flushCounter = 0;
 
@@ -40,7 +40,8 @@ public class OpenFileForWrite {
         } catch (IOException e) {
             log.error(e.getMessage());
         }
-        log.info("FILE FOR RECEIVED POINTS = " + tempFile.getAbsolutePath());
+        tempFileAbsolutePath = tempFile.getAbsolutePath();
+        log.info("FILE FOR RECEIVED POINTS = " + tempFileAbsolutePath);
         try {
             bufferedWriter = Files.newBufferedWriter(tempFile.toPath(), Charset.forName("utf-8"));
         } catch (IOException e) {
@@ -61,6 +62,11 @@ public class OpenFileForWrite {
             log.error(e.getMessage());
         }
 
+    }
+
+    // only for tests
+    public String getFileName(){
+        return tempFileAbsolutePath;
     }
 
     @Override

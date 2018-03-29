@@ -28,10 +28,7 @@ import org.springframework.web.client.RestTemplate;
 @PropertySource("classpath:/properties.ini")
 public class InjectionContext {
 
-    @Bean
-    public DataPeek peekService() {
-        return new DataPeek();
-    }
+
 
     @Bean
     public DataSend sendService() {
@@ -48,9 +45,14 @@ public class InjectionContext {
         return new QueueGPS();
     }
 
-    @Bean
+    @Bean  // TODO а зачем нужен этот бин?
     public PointDTO pointDTO() {
         return new PointDTO();
+    }
+
+    @Bean
+    public DataPeek peekService() {
+        return new DataPeek(queueGPS(),gpsService());
     }
 
     @Bean

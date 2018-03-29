@@ -11,10 +11,10 @@ import static org.junit.Assert.*;
 public class QueueGPSTest {
 
     private String expected = "{\"lat\":56.0,\"lon\":74.0,\"autoId\":\"o567gfd\",\"time\":1489900897458}";
-    PointDTO localpoint1 = null;
-    PointDTO localpoint2 = null;
-    QueueGPS queueGPS = null;
-    ObjectMapper mapper = null;
+    private PointDTO localpoint1 = null;
+    private PointDTO localpoint2 = null;
+    private QueueGPS queueGPS = null;
+    private ObjectMapper mapper = null;
 
     @Test
     public void take_put_getSize() throws IOException, InterruptedException {

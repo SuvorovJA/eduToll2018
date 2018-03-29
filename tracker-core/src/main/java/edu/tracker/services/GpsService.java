@@ -90,8 +90,18 @@ public class GpsService {
         localpoint = itWpl.next();
         return "{\"lat\":" + localpoint.getLongitude() + "," +
                 "\"lon\":" + localpoint.getLatitude() + "," +
-                "\"autoId\": \"E555EM70\"," +
+                "\"autoId\":\"E555EM70\"," +
                 "\"time\":" + localpoint.getTime().get().toInstant().toEpochMilli() +
                 "}";
+    }
+
+    // only for tests
+    public int getSize(){
+        return wpl.size();
+    }
+
+    // only for tests
+    public void setFileName(String fileName){
+        this.fileName = fileName;
     }
 }

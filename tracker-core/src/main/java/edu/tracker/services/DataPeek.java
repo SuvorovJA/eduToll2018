@@ -20,14 +20,16 @@ public class DataPeek {
 
     private static final Logger log = LoggerFactory.getLogger(DataPeek.class);
 
-    @Autowired
-    private GpsService gpsService;
+    private GpsService gpsService; //wired
+    private QueueGPS queueGPS; // wired
+    private PointDTO pointDTO; // local
 
-    @Autowired
-    private QueueGPS queueGPS;
-
-    @Autowired
-    private PointDTO pointDTO;
+    // конструктор только для тестов, без тестов достаточно @Autowired QueueGPS queueGPS; @Autowired GpsService gpsServic;
+    public DataPeek(@Autowired QueueGPS queueGPS, @Autowired GpsService gpsService){
+        this.pointDTO = null;
+        this.queueGPS = queueGPS;
+        this.gpsService = gpsService;
+    }
 
     @Scheduled(cron = "${data.peek.cron}")
     public void fetchGps() {
@@ -36,17 +38,16 @@ public class DataPeek {
         log.info("fetchGps() " + localstring);
         // переделать json в объект PointDTO
         ObjectMapper mapper = new ObjectMapper();
-        PointDTO localpoint = null;
         try {
-            localpoint = mapper.readValue(localstring, PointDTO.class);
+            pointDTO = mapper.readValue(localstring, PointDTO.class);
         } catch (IOException e) {
             log.error(e.getMessage());
             return;
         }
         // положить объект в Очередь QueueGPS
         try {
-            queueGPS.put(localpoint);
-        } catch (InterruptedException e) {
+            queueGPS.put(pointDTO);
+        } catch (NullPointerException | InterruptedException e) {
             log.error(e.getMessage());
         }
     }
