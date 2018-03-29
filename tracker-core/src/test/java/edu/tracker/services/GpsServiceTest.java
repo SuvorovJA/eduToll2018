@@ -2,6 +2,8 @@ package edu.tracker.services;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class GpsServiceTest {
@@ -11,7 +13,7 @@ public class GpsServiceTest {
     private GpsService gpsService = null;
 
     @Test
-    public void init_then_getNext() {
+    public void init_then_getNext() throws IOException {
         gpsService = new GpsService();
         gpsService.setFileName("11060.gpx");
         gpsService.init();

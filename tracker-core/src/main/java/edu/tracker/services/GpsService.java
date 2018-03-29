@@ -29,7 +29,7 @@ public class GpsService {
     private ListIterator<WayPoint> itWpl;
 
     @PostConstruct
-    public void init() {
+    public void init() throws IOException {
         log.info("gpx.source = " + fileName);
         // *******************************************************************************
         // это
@@ -50,26 +50,22 @@ public class GpsService {
         // whether it starts with '\' or other symbols. If you think about such details - you do
         // something wrong.
         // решение работает на обеих ОС:
-        ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        String filePath = null;
-        try {
-            filePath = Paths.get(cl.getResource(fileName).toURI()).toString();
-        } catch (NullPointerException | URISyntaxException e) {
-            log.error(e.getMessage());
-        }
+//        ClassLoader cl = Thread.currentThread().getContextClassLoader();
+//        String filePath = null;
+//        try {
+//            filePath = Paths.get(cl.getResource(fileName).toURI()).toString();
+//        } catch (NullPointerException | URISyntaxException e) {
+//            log.error(e.getMessage());
+//        }
         // filePath = C:\Users\lsua\IdeaProjects\eduToll2018\tracker-core\out\production\resources\11060.gpx
         // filePath = /home/lsua/DEV/DO-TUSUR/proJava/eduToll2018/tracker-core/out/production/resources/11060.gpx
         // *******************************************************************************
-        log.info("filePath = " + filePath);
+//        log.info("filePath = " + filePath);
         // читаем файл в List // только трэк 0 и только сегмент 0
         final boolean lenient = true;
         GPX gpx; // = null;
-        try {
-            gpx = GPX.read(filePath, lenient);
-        } catch (IOException e) {
-            log.error(e.getMessage());
-            return;
-        }
+//        gpx = GPX.read(filePath, lenient);
+        gpx = GPX.read(this.getClass().getResourceAsStream("/" + fileName));
         wpl = gpx.getTracks().get(0).getSegments().get(0).getPoints();
         log.info("Считано " + wpl.size() + " точек.");
         // получить итератор на начало списка
@@ -96,12 +92,12 @@ public class GpsService {
     }
 
     // only for tests
-    public int getSize(){
+    public int getSize() {
         return wpl.size();
     }
 
     // only for tests
-    public void setFileName(String fileName){
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 }

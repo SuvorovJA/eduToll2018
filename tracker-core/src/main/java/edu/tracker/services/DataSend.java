@@ -29,7 +29,7 @@ public class DataSend {
     }
 
     @Scheduled(cron = "${data.send.cron}")
-    public void sendToDB() {
+    public void sendToDB() throws InterruptedException, JsonProcessingException {
         int packet = queueGPS.getSize();
         if (packet == 0) {
             log.warn("очередь пуста");
@@ -37,19 +37,9 @@ public class DataSend {
         }
         PointDTO localpoint; // = null;
         for (int i = 1; i <= packet; ++i) {
-            try {
-                localpoint = queueGPS.take(); // выборка из очереди
-            } catch (InterruptedException e) {
-                log.error(e.getMessage());
-                break;
-            }
+            localpoint = queueGPS.take(); // выборка из очереди
             // в локальный лог
-            try {
-                log.info(localpoint.toJson() + "  (" + i + ")");
-            } catch (JsonProcessingException e) {
-                log.error(e.getMessage());
-                break;
-            }
+            log.info(localpoint.toJson() + "  (" + i + ")");
             // в ДБ, в возврате эхо от приёмника
             sendController.setPoint(localpoint);
         }
