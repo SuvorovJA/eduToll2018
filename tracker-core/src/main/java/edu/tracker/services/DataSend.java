@@ -51,7 +51,7 @@ public class DataSend {
                 break;
             }
             // в ДБ, в возврате эхо от приёмника
-            PointDTO pointDTO = sendController.setPoint(localpoint);
+            sendController.setPoint(localpoint);
         }
     }
 

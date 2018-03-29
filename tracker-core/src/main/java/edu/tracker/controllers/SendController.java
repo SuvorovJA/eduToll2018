@@ -24,15 +24,19 @@ public class SendController {
     @Value("${send.controller.dbserver}")
     private String dbServerURL;
 
-    @Autowired
     RestTemplate restTemplate;
 
-    public PointDTO setPoint(PointDTO point) {
+    public SendController(@Autowired RestTemplate restTemplate){
+        this.restTemplate = restTemplate;
+        this.point = null;
+    }
+
+    public ResponseEntity<PointDTO> setPoint(PointDTO point) {
         this.point = point;
         return postSend();
     }
 
-    private PointDTO postSend() {
+    private ResponseEntity<PointDTO> postSend() {
         // сохранение в БД
         //
         boolean statusOk = true;
@@ -69,6 +73,11 @@ public class SendController {
                 log.error(e.getMessage());
             }
         }
-        return pointDTOreturned;
+        return response;
     }
+
+    public void setDbServerURL(String dbServerURL) {
+        this.dbServerURL = dbServerURL;
+    }
+
 }

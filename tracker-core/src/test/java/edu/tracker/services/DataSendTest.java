@@ -52,11 +52,6 @@ public class DataSendTest {
         queueGPS.put(localpoint2);
         queueGPS.put(localpoint2);
         assertEquals(3L,queueGPS.getSize()); // two point on start
-        // interceptor
-//        when(sendController.setPoint(localpoint1)).thenReturn(localpoint1); // фейковый setPoint()
-//        when(sendController.setPoint(localpoint2)).thenReturn(localpoint2); // с двумя when тоже работает
-//        when(sendController.setPoint(any(PointDTO.class))).thenReturn(new PointDTO()); // и так тоже работает
-//      // и вообще when не влияет, потому что возврат из setPoint нигде не используется
         // test target
         dataSend = new DataSend(queueGPS,sendController);
         dataSend.sendToDB();

@@ -28,14 +28,19 @@ import org.springframework.web.client.RestTemplate;
 @PropertySource("classpath:/properties.ini")
 public class InjectionContext {
 
-    @Bean
-    public SendController sendController() {
-        return new SendController();
-    }
+    private RestTemplateBuilder builder;
+    private RestTemplate restTemplate;
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
+        this.builder = builder;
+        this.restTemplate=builder.build();
+        return this.restTemplate;
+    }
+
+    @Bean
+    public SendController sendController() {
+        return new SendController(restTemplate(this.builder));
     }
 
     @Bean
