@@ -2,6 +2,7 @@ package edu.server.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.dto.PointDTO;
+import edu.server.crud.Crud;
 import edu.server.services.OpenFileForWrite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,12 +21,16 @@ public class ReceiveController {
     @Autowired
     private OpenFileForWrite fileForWrite;
 
+    @Autowired
+    private Crud crud;
+
     // здесь в запросе прилетает сразу точка, принять и сохранить
     @RequestMapping(value = "/receiver", method = RequestMethod.POST)
     public @ResponseBody PointDTO addPoint(@RequestBody PointDTO localpoint) {
         try {
-            // сохранить в БД (вывести в лог и в файл)
-            log.info("RECEIVED POINT " + localpoint.toJson());
+            // сохранить в БД, вывести в лог и в файл
+//            log.info("RECEIVED POINT " + localpoint.toJson());
+            log.info(crud.create(localpoint).toString());
             fileForWrite.writeln(localpoint.toJson());
         } catch (JsonProcessingException e) {
             log.error(e.getMessage());

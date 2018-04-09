@@ -55,6 +55,14 @@ project(':server-core') {
         compile group: 'com.h2database', name: 'h2', version: '1.4.195'
         compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        //
+        // annotations for generating getters\setters\logging\etc
+        //  "lombok plugin is incompatible with current installation" in idea 2017.3
+        // https://plugins.jetbrains.com/plugin/6317-lombok-plugin
+        // https://projectlombok.org/features/log
+        // https://habrahabr.ru/post/352954/
+        // https://mvnrepository.com/artifact/org.projectlombok/lombok
+        // compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
         // tests
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
