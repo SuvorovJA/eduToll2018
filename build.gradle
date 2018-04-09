@@ -67,6 +67,8 @@ project(':server-core') {
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+        testCompile group: 'com.h2database', name: 'h2', version: '1.4.195'
+        testCompile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
         //
         compile project(':common')
     }
@@ -81,10 +83,17 @@ project(':tracker-core') {
         // parsing GPX file for GPS Service
         // https://mvnrepository.com/artifact/io.jenetics/jpx
         compile group: 'io.jenetics', name: 'jpx', version: '1.2.3'
+        //подключение драйвера H2 + JPA
+        compile group: 'com.h2database', name: 'h2', version: '1.4.195'
+        compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        //
         // tests
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+        testCompile group: 'com.h2database', name: 'h2', version: '1.4.195'
+        testCompile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
         //
         compile project(':common')
     }

@@ -1,5 +1,5 @@
 /*
- * берет данные из  QueueGPS  помещает в базу данных (очередь QueueDB или Лог) в формате json
+ * берет данные из  QueueGPS  помещает в базу данных (лог-БД, очередь QueueDB или Лог) в формате json
  * периодичность ~0,5 минутa
  */
 package edu.tracker.services;
@@ -7,6 +7,7 @@ package edu.tracker.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.dto.PointDTO;
 import edu.tracker.controllers.SendController;
+import edu.tracker.crud.Crud;
 import edu.tracker.storage.QueueGPS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,9 @@ public class DataSend {
     private QueueGPS queueGPS;
 
     private SendController sendController;
+
+    @Autowired
+    private Crud crud;
 
     public DataSend(@Autowired QueueGPS queueGPS, @Autowired SendController sendController) {
         this.queueGPS = queueGPS;
@@ -39,9 +43,11 @@ public class DataSend {
         for (int i = 1; i <= packet; ++i) {
             localpoint = queueGPS.take(); // выборка из очереди
             // в локальный лог
-            log.info(localpoint.toJson() + "  (" + i + ")");
-            // в ДБ, в возврате эхо от приёмника
+            // log.info(localpoint.toJson() + "  (" + i + ")");
+            // в ДБ server-core, в возврате эхо от приёмника
             sendController.setPoint(localpoint);
+            // в свою лог-ДБ, ну и в консольный лог до кучи, нам не жалко
+            log.info(crud.create(localpoint).toString());
         }
     }
 

@@ -6,16 +6,20 @@ package edu.tracker.context;
 
 import edu.dto.PointDTO;
 import edu.tracker.controllers.SendController;
+import edu.tracker.crud.Crud;
 import edu.tracker.services.DataPeek;
 import edu.tracker.services.DataSend;
 import edu.tracker.services.GpsService;
 import edu.tracker.storage.QueueGPS;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -26,6 +30,8 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @EnableScheduling
 @PropertySource("classpath:/properties.ini")
+@EnableJpaRepositories(basePackages = "edu.tracker.repository.repo")
+@EntityScan(basePackageClasses = edu.tracker.repository.PointDTOEntity.class)
 public class InjectionContext {
 
     private RestTemplateBuilder builder;
@@ -74,6 +80,18 @@ public class InjectionContext {
         scheduler.setThreadNamePrefix("poolScheduler");
         scheduler.setPoolSize(20);
         return scheduler;
+    }
+
+
+        // jpa+h2
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public Crud crud(){
+        return new Crud();
     }
 
 }
