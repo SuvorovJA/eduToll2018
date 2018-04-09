@@ -50,6 +50,11 @@ project(':server-core') {
         compile("org.springframework.boot:spring-boot-starter-thymeleaf")   // where that using in server-core ???
         compile("org.springframework.boot:spring-boot-devtools")            // where that using ???
         compile group: 'commons-io', name: 'commons-io', version: '2.5'     // where that using ???
+        //
+        //подключение драйвера H2 + JPA
+        compile group: 'com.h2database', name: 'h2', version: '1.4.195'
+        compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
         // tests
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
@@ -103,7 +108,7 @@ project(':server-ui') {
     jar {
         // where that using ???
         baseName = 'security-boot'
-        version =  '0.1.0'
+        version = '0.1.0'
     }
 
 }
