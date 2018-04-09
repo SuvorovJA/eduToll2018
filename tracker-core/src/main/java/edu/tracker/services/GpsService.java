@@ -26,6 +26,11 @@ public class GpsService {
     private List<WayPoint> wpl;
     private ListIterator<WayPoint> itWpl;
 
+    private boolean gosnomerSelector;
+    private String gos1 = "E555EM70";
+    private String gos2 = "A123BC78";
+
+
     @PostConstruct
     public void init() throws IOException {
         log.info("gpx.source = " + fileName);
@@ -68,6 +73,9 @@ public class GpsService {
         log.info("Считано " + wpl.size() + " точек.");
         // получить итератор на начало списка
         itWpl = wpl.listIterator();
+        // точка считанная из файла по очереди приписывается то одному госномеру то другому,
+        // типа два авто синхронно едут по треку
+        gosnomerSelector=false;
     }
 
     // результат без использования com.fasterxml.jackson.
@@ -82,9 +90,10 @@ public class GpsService {
             itWpl = wpl.listIterator(0); // начинаем с начала;
         }
         localpoint = itWpl.next();
+        gosnomerSelector = !gosnomerSelector;
         return "{\"lat\":" + localpoint.getLongitude() + "," +
                 "\"lon\":" + localpoint.getLatitude() + "," +
-                "\"autoId\":\"E555EM70\"," +
+                "\"autoId\":\"" + ((gosnomerSelector)?gos1:gos2) + "\"," +
                 "\"time\":" + localpoint.getTime().get().toInstant().toEpochMilli() +
                 "}";
     }
