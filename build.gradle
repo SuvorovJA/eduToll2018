@@ -25,7 +25,6 @@ subprojects {
 }
 
 // для Spring Boot
-
 buildscript {
     repositories {
         mavenCentral()
@@ -36,7 +35,6 @@ buildscript {
 }
 
 // modules
-
 project(':common') {
     dependencies {
         // json
@@ -47,9 +45,10 @@ project(':common') {
 project(':server-core') {
     apply plugin: 'org.springframework.boot'
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")   // where that using in server-core ???
-        compile("org.springframework.boot:spring-boot-devtools")            // where that using ???
-        compile group: 'commons-io', name: 'commons-io', version: '2.5'     // where that using ???
+        // where that using in server-core ???
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-devtools")
+        compile group: 'commons-io', name: 'commons-io', version: '2.5'
         //
         //подключение драйвера H2 + JPA
         compile group: 'com.h2database', name: 'h2', version: '1.4.195'
@@ -57,18 +56,33 @@ project(':server-core') {
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
         //
         // annotations for generating getters\setters\logging\etc
-        //  "lombok plugin is incompatible with current installation" in idea 2017.3
+        //
+        //  https://mvnrepository.com/artifact/org.projectlombok/lombok
+        //  provided group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
+        //      err:
+        //      Could not find method provided() for arguments [{group=org.projectlombok, name=lombok, version=1.16.20}]
+        //
+        // 'compile' can be changed to 'compileOnly' for Gradle 2.12+
+        // or 'provided' if using 'propdeps' plugin from SpringSource
+        compile "org.projectlombok:lombok:1.16.20"
+        //
+        // about lombok
         // https://plugins.jetbrains.com/plugin/6317-lombok-plugin
         // https://projectlombok.org/features/log
         // https://habrahabr.ru/post/352954/
-        // https://mvnrepository.com/artifact/org.projectlombok/lombok
-        // compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
+        // https://github.com/mplushnikov/lombok-intellij-plugin :
+        //   Required IntelliJ Configuration:
+        //   In your project: Click Preferences -> Build, Execution, Deployment -> Compiler, Annotation Processors.
+        //   Click Enable Annotation Processing
+        //   Afterwards you might need to do a complete rebuild of your project via Build -> Rebuild Project.
+        //
         // tests
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
         testCompile group: 'com.h2database', name: 'h2', version: '1.4.195'
         testCompile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
+        testCompile "org.projectlombok:lombok:1.16.20"
         //
         compile project(':common')
     }
@@ -77,12 +91,15 @@ project(':server-core') {
 project(':tracker-core') {
     apply plugin: 'org.springframework.boot'
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")   // where that using in tracker-core???
-        compile("org.springframework.boot:spring-boot-devtools")            // where that using ???
-        compile group: 'commons-io', name: 'commons-io', version: '2.5'     // where that using ???
+        // where that using in tracker-core???
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-devtools")
+        compile group: 'commons-io', name: 'commons-io', version: '2.5'
+        //
         // parsing GPX file for GPS Service
         // https://mvnrepository.com/artifact/io.jenetics/jpx
         compile group: 'io.jenetics', name: 'jpx', version: '1.2.3'
+        //
         //подключение драйвера H2 + JPA
         compile group: 'com.h2database', name: 'h2', version: '1.4.195'
         compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
@@ -107,13 +124,15 @@ project(':tracker-ui') {
 
 project(':server-ui') {
     apply plugin: 'org.springframework.boot'
-
     dependencies {
         compile("org.springframework.boot:spring-boot-starter-thymeleaf") //ok
+        //
         // spring-boot-devtools сюда надо??
+        //
         // tag::security[]
         compile("org.springframework.boot:spring-boot-starter-security")
         // end::security[]
+        //
         // tests
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
