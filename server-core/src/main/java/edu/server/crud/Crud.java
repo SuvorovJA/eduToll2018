@@ -33,6 +33,14 @@ public class Crud {
         pointDTORepository.save(point);
     }
 
+    public void update(PointDTOEntity point) {
+        pointDTORepository.save(point);
+    }
+
+    public PointDTOEntity read(int id){
+        return pointDTORepository.findOne(id);
+    }
+
     // можно зашедулить для мониторинга содержимого таблицы если не жалко лога
     public void read() {
         // будет мегадлинный-же вывод
@@ -43,7 +51,6 @@ public class Crud {
             all.stream().forEach(point -> log.info(point.toString()));
         }
     }
-
 
     //в логи прилетает (при включенном дебаге гибернейта)
     //      2018-04-09 20:54:00.261 DEBUG 12711 --- [nio-8090-exec-8] org.hibernate.SQL
