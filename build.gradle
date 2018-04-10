@@ -105,6 +105,9 @@ project(':tracker-core') {
         compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
         //
+        // annotations for generating getters\setters\logging\etc
+        compile "org.projectlombok:lombok:1.16.20"
+        //
         // tests
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.springframework.security:spring-security-test")
