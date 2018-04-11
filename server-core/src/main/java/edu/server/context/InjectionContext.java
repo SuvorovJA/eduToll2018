@@ -1,6 +1,7 @@
 package edu.server.context;
 
 import edu.server.controllers.ReceiveController;
+import edu.server.controllers.ShowController;
 import edu.server.crud.Crud;
 import edu.server.services.OpenFileForWrite;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,6 +24,11 @@ public class InjectionContext {
     @Bean
     public ReceiveController receiveController() {
         return new ReceiveController();
+    }
+
+    @Bean
+    public ShowController showController(){
+        return  new ShowController();
     }
 
     @Bean

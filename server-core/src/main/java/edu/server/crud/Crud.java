@@ -4,12 +4,13 @@ package edu.server.crud;
 import edu.dto.PointDTO;
 import edu.server.repository.PointDTOEntity;
 import edu.server.repository.repo.PointDTORepository;
-//import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
+//import lombok.extern.slf4j.Slf4j;
 
 //@Slf4j
 public class Crud {
@@ -39,6 +40,16 @@ public class Crud {
 
     public PointDTOEntity read(int id){
         return pointDTORepository.findOne(id);
+    }
+
+    public List<PointDTOEntity> readLastNForAutoid(int lastnum, String autoid){
+        List<PointDTOEntity> sel = (List<PointDTOEntity>) pointDTORepository.fetchLastNForAutoid(lastnum,autoid);
+        return sel;
+    }
+
+    public List<PointDTOEntity> readLastN(int lastnum){
+        List<PointDTOEntity> sel = (List<PointDTOEntity>) pointDTORepository.fetchLastN(lastnum);
+        return sel;
     }
 
     // можно зашедулить для мониторинга содержимого таблицы если не жалко лога

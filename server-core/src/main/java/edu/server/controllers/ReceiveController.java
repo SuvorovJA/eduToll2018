@@ -14,10 +14,6 @@ public class ReceiveController {
 
     private static final Logger log = LoggerFactory.getLogger(ReceiveController.class);
 
-//   не используется
-//   @Autowired
-//    RestTemplate restTemplate;
-
     @Autowired
     private OpenFileForWrite fileForWrite;
 
