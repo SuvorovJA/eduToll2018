@@ -18,6 +18,6 @@ public class GpsServiceTest {
         gpsService.setFileName("11060.gpx");
         gpsService.init();
         assertEquals(1441L, gpsService.getSize());
-        assertEquals(expected, gpsService.getNext());
+        assertEquals(expected, gpsService.getNext(0)); // TODO fix that 0
     }
 }

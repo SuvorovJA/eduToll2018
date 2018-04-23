@@ -3,6 +3,7 @@ package edu.tracker.storage;
 import edu.dto.PointDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,15 @@ public class QueueGPS {
 
     private static final Logger log = LoggerFactory.getLogger(QueueGPS.class);
 
-    private BlockingDeque<PointDTO> queue = new LinkedBlockingDeque<>(100);
+    private BlockingDeque<PointDTO> queue = new LinkedBlockingDeque<>(100*5);
 
     public PointDTO take() throws InterruptedException {
         return queue.take();
     }
 
+    @Async
     public void put(PointDTO p) throws InterruptedException {
+        log.info("@Async/put()");
         queue.put(p);
     }
 

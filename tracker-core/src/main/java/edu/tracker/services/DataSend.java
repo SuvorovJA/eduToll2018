@@ -45,7 +45,7 @@ public class DataSend {
             // в локальный лог
             // log.info(localpoint.toJson() + "  (" + i + ")");
             // в ДБ server-core, в возврате эхо от приёмника
-            sendController.setPoint(localpoint);
+            sendController.setPoint(localpoint);        // Async ?
             // в свою лог-ДБ, ну и в консольный лог до кучи, нам не жалко
             log.info(crud.create(localpoint).toString());
         }

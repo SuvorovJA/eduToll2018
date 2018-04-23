@@ -5,6 +5,7 @@ import edu.tracker.storage.QueueGPS;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.*;
 
@@ -19,7 +20,7 @@ public class DataPeekTest {
     private DataPeek dataPeek = null;
 
     @Test
-    public void fetchGps_integration() throws IOException, InterruptedException {
+    public void fetchGps_integration() throws IOException, InterruptedException, ExecutionException {
         // очередь
         queueGPS = new QueueGPS();
         // гпс сервис
