@@ -64,7 +64,7 @@ project(':server-core') {
         //
         // 'compile' can be changed to 'compileOnly' for Gradle 2.12+
         // or 'provided' if using 'propdeps' plugin from SpringSource
-        compile "org.projectlombok:lombok:1.16.20"
+//        compile "org.projectlombok:lombok:1.16.20"
         //
         // about lombok
         // https://plugins.jetbrains.com/plugin/6317-lombok-plugin
@@ -82,7 +82,7 @@ project(':server-core') {
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
         testCompile group: 'com.h2database', name: 'h2', version: '1.4.195'
         testCompile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
-        testCompile "org.projectlombok:lombok:1.16.20"
+//        testCompile "org.projectlombok:lombok:1.16.20"
         //
         compile project(':common')
     }
@@ -106,7 +106,7 @@ project(':tracker-core') {
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
         //
         // annotations for generating getters\setters\logging\etc
-        compile "org.projectlombok:lombok:1.16.20"
+//        compile "org.projectlombok:lombok:1.16.20"
         //
         // tests
         testCompile("org.springframework.boot:spring-boot-starter-test")
